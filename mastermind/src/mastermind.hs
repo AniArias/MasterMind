@@ -32,3 +32,35 @@ keep v (y:ys) xs =
 				 let 
 					a = xs !! y
 				 in [a] ++ keep (v-1) ys xs
+
+
+--- ....shift ... lista para combinar				 
+shift :: Int -> [Int] -> [(Int,Int)] -> [(Int,Int)]
+shift 0 _ _ = []
+shift v (y:ys) xs = 
+				 let 
+					a = xs !! y
+				 in [a] ++ shift (v-1) ys xs
+
+-- score -> cfg -> npg				 
+n_pot_guess :: [Int] -> [(Int,Int)] -> [(Int,Int)]
+n_pot_guess sc cfg =
+					let
+						black = sc !! 0
+						white = sc !! 1
+						list_keep = keep black [1,0,2,3] cfg
+						list_shift = shift white [0,3,2,1] cfg	
+						npg = sort_NPG list_keep list_shift
+					in npg
+				 
+-- lista de keep -> lista shift -> lista ordenado
+sort_NPG :: [(Int,Int)] -> [(Int,Int)] -> [(Int,Int)]
+sort_NPG k s
+	
+	| length(k) == 1 && length(s)==2 = let 
+										a = s!!1
+										b = k!!0
+										c = s!!0
+										d = (4,3)
+										list@[x,y,z,xs]=[ a, b, c, d]
+										in list
